@@ -1,16 +1,16 @@
 import datetime 
-"""Reading csv file and loading it to list"""
+"""----------------------Reading csv file and loading it to list--------------------"""
 
 def loadData(filepath):
     data =  []
     col = []
-    checkcol = False
+    checkcol1 = False
     with open(filepath) as f:
         for val in f.readlines():
             val = val.split(',')
-            if checkcol is False:
+            if checkcol1 is False:
                 col = val
-                checkcol = True
+                checkcol1 = True
             else:
                 formater="%Y-%m-%d"
                 date=datetime.datetime.strptime(val[0], formater).date()# converting string to date
@@ -21,22 +21,12 @@ def loadData(filepath):
                 val[0]=date
                 val.append(month)
                 data.append(val)
-    return data,col
-"""end to reading file"""
+    return data
+"""-------------------------end to reading file------------------------------------------"""
 
 
-
-parlorData,coloumns = loadData('data.csv')
-print(type(parlorData[0][0]),parlorData[0][-1])
-
-# print("************************")
-# print("Coloumns\n",*coloumns)
-# print("************************");
-
-# print("\n************************")
-# print("Total number Sales =",len(parlorData))
-# print("************************");
-year_total_sales=len(parlorData)
+parlorData = loadData('data.csv')
+year_total_sales=0
 year_total_items_sold=0
 year_total_revenue=0
 
@@ -74,8 +64,10 @@ months=["January", "February", "March", "April", "May", "June", "July", "August"
 for index, month in enumerate(months):
     startIndxe=binarySearchStart(index+1)
     endIndex=binarySearchEnd(index+1)
-    if(startIndxe==None or endIndex==NoneTypegit )
+    if(startIndxe==None or endIndex==None ):
+        continue
     month_total_numberOf_sales=endIndex-startIndxe+1
+    print(startIndxe,endIndex,month_total_numberOf_sales)
     month_total_items_sold=0
     month_total_money_made=0
     most_popular_item=None
@@ -124,10 +116,13 @@ for index, month in enumerate(months):
     year_total_items_sold+=month_total_items_sold
     year_total_revenue+=month_total_money_made
     year_total_sales+=month_total_numberOf_sales
-print("********************************")
+
+
+    
+print("\n********************************")
 print("Complete Year details")
-print("\t Total items sold =",year_total_items_sold)
+print("\t Total number of items sold =",year_total_items_sold)
 print("\t Total number of sales =",year_total_sales)
 print("\t Total revenue made =",year_total_revenue)
-
+print("********************************")
 
